@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
-  before_action :set_quote, except: %i[index]
+  before_action :set_quote, only: %i[show edit update destroy]
 
   def index
     @quotes = Quote.all
@@ -20,6 +20,16 @@ class QuotesController < ApplicationController
       redirect_to quotes_path, notice: 'Quote was successfully created.'
     else
       render :new
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @quote.update!(quote_params)
+      redirect_to quotes_path, notice: 'Quote was successfully updated.'
+    else
+      render :edit
     end
   end
 
