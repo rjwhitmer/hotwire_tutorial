@@ -1,0 +1,49 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  Exclude:
+    - bin/**
+    - db/**/*
+    - test/dummy/**/*
+    - test/**/*
+    - vendor/bundle/**/*
+
+Layout/LineLength:
+  Max: 120
+
+Lint/MissingSuper:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - config/environments/*.rb
+    - config/routes.rb
+
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - app/models/remote_order.rb
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: true
+  Exclude:
+    # Sidekiq workers don't accept hashes as arguments as they're not considered
+    # safe as arguments. However, we would like to be able to pass optional
+    # arguments to workers.
+    - app/workers/**/*.rb
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - config/**/*.rb
+
+Rails/I18nLocaleTexts:
+  Enabled: false
